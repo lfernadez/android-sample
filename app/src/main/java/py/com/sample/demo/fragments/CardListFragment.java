@@ -66,12 +66,15 @@ public class CardListFragment extends Fragment {
         bus1.setImageResoureId(R.drawable.bus_5);
         bus1.setHorario("07:00 a 14:00");
         bus1.setPrecio("50000");
+        bus1.setEmpresa("TL S.A.");
         bus2.setImageResoureId(R.drawable.bus_5);
         bus2.setHorario("07:00 a 14:00");
         bus2.setPrecio("50000");
+        bus1.setEmpresa("TL S.A.");
         bus3.setImageResoureId(R.drawable.bus_5);
         bus3.setHorario("07:00 a 14:00");
         bus3.setPrecio("50000");
+        bus1.setEmpresa("TL S.A.");
         busData.add(bus1);
         busData.add(bus2);
         busData.add(bus3);
@@ -113,6 +116,7 @@ public class CardListFragment extends Fragment {
          */
         public static class ViewHolder extends RecyclerView.ViewHolder {
             public String mBoundString;
+            public int mImageResourceId;
 
             public final View mView;
             public final ImageView mImageView;
@@ -140,7 +144,9 @@ public class CardListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final ItemRecyclerViewAdapter.ViewHolder holder, int position) {
+            holder.mBoundString = mValues.get(position).getEmpresa();
             holder.mImageView.setImageResource(mValues.get(position).getImageResoureId());
+            holder.mImageResourceId = mValues.get(position).getImageResoureId();
 
             //Set onClickListener over cardView item
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +155,7 @@ public class CardListFragment extends Fragment {
                     Context context = v.getContext();
                     Intent intent = new Intent(context, CardItemDetailActivity.class);
                     intent.putExtra(CardItemDetailActivity.EXTRA_NAME_DETAIL, holder.mBoundString);
+                    intent.putExtra(CardItemDetailActivity.EXTRA_IMAGE_ID_RESOURCE, holder.mImageResourceId);
                     context.startActivity(intent);
                 }
             });
